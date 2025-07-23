@@ -15,6 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import base64
 import inspect
 import math
 import os
@@ -248,7 +249,11 @@ class MMPluginMixin:
         r"""Regularize images to avoid error. Including reading and pre-processing."""
         results = []
         for image in images:
-            if isinstance(image, (str, BinaryIO)):
+            if isinstance(image, str) and ";base64" in image:
+                # Handle base64 encoded images
+                header, encoded = image.split(";base64,")
+                image = Image.open(BytesIO(base64.b64decode(encoded)))
+            elif isinstance(image, (str, BinaryIO)):
                 image = Image.open(image)
             elif isinstance(image, bytes):
                 image = Image.open(BytesIO(image))
@@ -403,6 +408,27 @@ class BasePlugin(MMPluginMixin):
         r"""Pre-process input messages before tokenization for VLMs."""
         self._validate_input(processor, images, videos, audios)
         return messages
+
+
+    def process_text_only(self, messages: list[dict[str, str]],
+        images: list["ImageInput"],
+        videos: list["VideoInput"],
+        audios: list["AudioInput"],
+        processor: Optional["MMProcessor"],
+    ) -> list[dict[str, str]]:
+        r"""remove image and process text only"""
+        text_messages = deepcopy(messages)
+        for message in text_messages:
+            content = message["content"]
+            if IMAGE_PLACEHOLDER in content:
+                content = content.replace(IMAGE_PLACEHOLDER, "")
+            if AUDIO_PLACEHOLDER in content:
+                content = content.replace(AUDIO_PLACEHOLDER, "")
+            if VIDEO_PLACEHOLDER in content:
+                content = content.replace(VIDEO_PLACEHOLDER, "")
+            message["content"] = content
+
+        return text_messages 
 
     def process_token_ids(
         self,
