@@ -30,6 +30,7 @@ from .processor import (
     PairwiseDatasetProcessor,
     PretrainDatasetProcessor,
     SupervisedDatasetProcessor,
+    SupervisedDatasetProcessorWithMask,
     UnsupervisedDatasetProcessor,
 )
 
@@ -189,7 +190,7 @@ def _get_merged_dataset(
 
 def _get_dataset_processor(
     data_args: "DataArguments",
-    stage: Literal["pt", "sft", "rm", "ppo", "kto"],
+    stage: Literal["pt", "sft", "rm", "ppo", "kto", "sft_lossmask"],
     template: "Template",
     tokenizer: "PreTrainedTokenizer",
     processor: Optional["ProcessorMixin"],
@@ -216,7 +217,8 @@ def _get_dataset_processor(
             dataset_processor_class = PackedSupervisedDatasetProcessor
         else:
             dataset_processor_class = SupervisedDatasetProcessor
-
+    elif stage == "sft_lossmask" and not do_generate:
+        dataset_processor_class = SupervisedDatasetProcessorWithMask
     elif stage == "rm":
         dataset_processor_class = PairwiseDatasetProcessor
     elif stage == "kto":
