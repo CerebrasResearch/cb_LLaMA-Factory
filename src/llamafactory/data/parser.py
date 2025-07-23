@@ -62,6 +62,8 @@ class DatasetAttr:
     observation_tag: Optional[str] = "observation"
     function_tag: Optional[str] = "function_call"
     system_tag: Optional[str] = "system"
+    # sharegptmask
+    loss_mask: Optional[str] = "loss_mask"
 
     def __repr__(self) -> str:
         return self.dataset_name
@@ -79,7 +81,7 @@ class DatasetAttr:
 
         if "columns" in attr:
             column_names = ["prompt", "query", "response", "history", "messages", "system", "tools"]
-            column_names += ["images", "videos", "audios", "chosen", "rejected", "kto_tag"]
+            column_names += ["images", "videos", "audios", "chosen", "rejected", "kto_tag", "loss_mask"]
             for column_name in column_names:
                 self.set_attr(column_name, attr["columns"])
 
