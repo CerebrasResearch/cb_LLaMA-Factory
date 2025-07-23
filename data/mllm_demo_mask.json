@@ -1,0 +1,149 @@
+[
+  {
+    "messages": [
+      {
+        "content": "<image>Who are they?",
+        "role": "user"
+      },
+      {
+        "content": "They're Kane and Gretzka from Bayern Munich.",
+        "role": "assistant"
+      },
+      {
+        "content": "What are they doing?<image>",
+        "role": "user"
+      },
+      {
+        "content": "They are celebrating on the soccer field.",
+        "role": "assistant"
+      }
+    ],
+    "images": [
+      "mllm_demo_data/1.jpg",
+      "data:image/png;base64,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"
+    ],
+    "system": "Please answer the questions based on the images provided.",
+    "loss_mask": [1,1,0,1]
+  },
+  {
+    "messages": [
+      {
+        "content": "<image>Who is he?",
+        "role": "user"
+      },
+      {
+        "content": "He's Thomas Muller from Bayern Munich.",
+        "role": "assistant"
+      },
+      {
+        "content": "Why is he on the ground?",
+        "role": "user"
+      },
+      {
+        "content": "Because he's sliding on his knees to celebrate.",
+        "role": "assistant"
+      }
+    ],
+    "images": [
+      "mllm_demo_data/2.jpg"
+    ],
+    "loss_mask": [0,1,1,1]
+  },
+  {
+    "messages": [
+      {
+        "content": "<image>Please describe this image",
+        "role": "user"
+      },
+      {
+        "content": "Chinese astronaut Gui Haichao is giving a speech.",
+        "role": "assistant"
+      },
+      {
+        "content": "What has he accomplished?",
+        "role": "user"
+      },
+      {
+        "content": "He was appointed to be a payload specialist on Shenzhou 16 mission in June 2022, thus becoming the first Chinese civilian of Group 3 in space on 30 May 2023. He is responsible for the on-orbit operation of space science experimental payloads.",
+        "role": "assistant"
+      }
+    ],
+    "images": [
+      "mllm_demo_data/3.jpg"
+    ],
+    "loss_mask": [0,1,1,1]
+  },
+  {
+    "messages": [
+      {
+        "content": "<image>他们是谁？",
+        "role": "user"
+      },
+      {
+        "content": "他们是拜仁慕尼黑的凯恩和格雷茨卡。",
+        "role": "assistant"
+      },
+      {
+        "content": "他们在做什么？<image>",
+        "role": "user"
+      },
+      {
+        "content": "他们在足球场上庆祝。",
+        "role": "assistant"
+      }
+    ],
+    "images": [
+      "mllm_demo_data/1.jpg",
+      "mllm_demo_data/1.jpg"
+    ],
+    "loss_mask": [0,1,0,1]
+  },
+  {
+    "messages": [
+      {
+        "content": "<image>他是谁？",
+        "role": "user"
+      },
+      {
+        "content": "他是来自拜仁慕尼黑的托马斯·穆勒。",
+        "role": "assistant"
+      },
+      {
+        "content": "他为什么在地上？",
+        "role": "user"
+      },
+      {
+        "content": "因为他正在双膝跪地滑行庆祝。",
+        "role": "assistant"
+      }
+    ],
+    "images": [
+      "mllm_demo_data/2.jpg"
+    ],
+    "loss_mask": [0,1,0,1]
+  },
+  {
+    "messages": [
+      {
+        "content": "<image>请描述这张图片",
+        "role": "user"
+      },
+      {
+        "content": "中国宇航员桂海潮正在讲话。",
+        "role": "assistant"
+      },
+      {
+        "content": "他取得过哪些成就？",
+        "role": "user"
+      },
+      {
+        "content": "他于2022年6月被任命为神舟十六号任务的有效载荷专家，从而成为2023年5月30日进入太空的首位平民宇航员。他负责在轨操作空间科学实验有效载荷。",
+        "role": "assistant"
+      }
+    ],
+    "images": [
+      "mllm_demo_data/3.jpg"
+    ],
+    "loss_mask": [0,1,0,1]
+  }
+]
