@@ -1,0 +1,60 @@
+### model
+model_name_or_path: google/gemma-3-4b-it
+image_max_pixels: 1048576
+image_min_pixels: 1024
+video_max_pixels: 16384
+trust_remote_code: true
+flash_attn: auto
+
+
+### method
+stage: sft_lossmask
+do_train: true
+finetuning_type: full
+freeze_vision_tower: true
+freeze_multi_modal_projector: true
+freeze_language_model: false
+deepspeed: null
+
+### dataset
+dataset_dir: "data"
+dataset: gemma3_planner
+template: gemma3
+cutoff_len: 8192
+max_samples: 100000
+overwrite_cache: true
+preprocessing_num_workers: 16
+dataloader_num_workers: 4
+
+### output
+output_dir: /mlf11-shared/multimodal/aarti/cb_LLaMA-Factory/scripts/cerebras/model_dirs/gemma3_4b_planner_0724
+logging_steps: 10
+save_steps: 500
+plot_loss: true
+overwrite_output_dir: false
+save_only_model: false
+report_to: wandb  # choices: [none, wandb, tensorboard, swanlab, mlflow]
+run_name: gemma3_4b_planner_0724
+save_safetensors: false
+
+
+### train
+do_train: true
+optim: adamw_torch
+per_device_train_batch_size: 32
+gradient_accumulation_steps: 2
+learning_rate: 5.0e-5
+num_train_epochs: 1.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+bf16: true
+ddp_timeout: 180000000
+resume_from_checkpoint: null
+
+
+
+### eval
+# val_size: 0.1
+# per_device_eval_batch_size: 1
+# eval_strategy: steps
+# eval_steps: 500

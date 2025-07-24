@@ -53,6 +53,21 @@
       "assistant_tag": "assistant"
     }
   },
+  "gemma3_planner": {
+    "file_name": "/mlf11-shared/multimodal/aarti/datasets/scienceqa/planner_sharegptformat/converted_results.json",
+    "formatting": "sharegpt_mask",
+    "columns": {
+      "messages": "messages",
+      "images": "images",
+      "loss_mask": "loss_mask"
+    },
+    "tags": {
+      "role_tag": "role",
+      "content_tag": "content",
+      "user_tag": "user",
+      "assistant_tag": "assistant"
+    }
+  },
   "mllm_audio_demo": {
     "file_name": "mllm_audio_demo.json",
     "formatting": "sharegpt",
