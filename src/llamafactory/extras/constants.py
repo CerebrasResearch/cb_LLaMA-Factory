@@ -81,6 +81,7 @@ TRAINING_STAGES = {
     "DPO": "dpo",
     "KTO": "kto",
     "Pre-Training": "pt",
+    "Supervised Finetuning with loss mask": "sft_lossmask"
 }
 
 STAGES_USE_PAIR_DATA = {"rm", "dpo"}
