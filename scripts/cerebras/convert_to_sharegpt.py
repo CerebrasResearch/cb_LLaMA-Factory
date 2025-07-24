@@ -254,6 +254,7 @@ def process_jsonl_files(csv_file_path: str, jsonl_folder_path: str, output_file_
                         converted_item["problem"] = problem
                         converted_item["plan_id"] = item.get("plan_id", "")
                         converted_item["answer"] = item.get("answer", "")
+                        converted_item["reward_file"] = jsonl_file
                         
                         converted_results.append(converted_item)
 
@@ -273,12 +274,10 @@ def process_jsonl_files(csv_file_path: str, jsonl_folder_path: str, output_file_
     if output_file_path:
         try:
             with open(output_file_path, 'w', encoding='utf-8') as f:
-                for result in converted_results:
-                    f.write(json.dumps(result) + '\n')
+                json.dump(converted_results, f, ensure_ascii=False, indent=4)
             print(f"Results saved to: {output_file_path}")
         except Exception as e:
             print(f"Error saving results: {e}")
-    
     return converted_results
 
 
@@ -326,7 +325,7 @@ if __name__ == "__main__":
     logging.info(f"Chosen problems saved to {chosen_csv_path}")
     # Convert to ShareGPT format and save
     
-    output_file_path = os.path.join(args.output_folder, "converted_results.jsonl")
+    output_file_path = os.path.join(args.output_folder, "converted_results.json")
     process_jsonl_files(chosen_csv_path, args.folder_path, output_file_path)
 
     
