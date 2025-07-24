@@ -9,7 +9,6 @@ flash_attn: auto
 
 ### method
 stage: sft_lossmask
-do_train: true
 finetuning_type: full
 freeze_vision_tower: true
 freeze_multi_modal_projector: true
