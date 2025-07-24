@@ -131,24 +131,24 @@ def convert_json_format_to_sharegpt(input_data):
             user_text = "".join(user_text_parts)
             if user_text:
                 conversations.append({
-                    "from": "human",
-                    "value": user_text
+                    "role": "user",
+                    "content": user_text
                 })
         
         elif key.startswith("assistant"):
             # Process assistant message
             if isinstance(data, str) and data:
                 conversations.append({
-                    "from": "gpt",
-                    "value": data
+                    "role": "assistant",
+                    "content": data
                 })
             elif isinstance(data, dict):
                 # Handle dict format for assistant (extract text if needed)
                 text = data.get("text", str(data))
                 if text:
                     conversations.append({
-                        "from": "gpt",
-                        "value": text
+                        "role": "assistant",
+                        "content": text
                     })
     
     # Generate loss mask based on the last assistant message
@@ -157,22 +157,22 @@ def convert_json_format_to_sharegpt(input_data):
     
     # Find the last assistant message
     for conv in reversed(conversations):
-        if conv["from"] == "gpt":
-            last_assistant_message = conv["value"]
+        if conv["role"] == "assistant":
+            last_assistant_message = conv["content"]
             break
     
     # Determine loss mask logic
     if last_assistant_message and last_assistant_message.startswith("No the plan is not good"):
         # Only apply loss to the last assistant message
         for i, conv in enumerate(conversations):
-            if conv["from"] == "gpt" and i == len(conversations) - 1:
+            if conv["role"] == "assistant" and i == len(conversations) - 1:
                 loss_mask.append(1)  # Last assistant message gets loss
             else:
                 loss_mask.append(0)  # All others get no loss
     else:
         # Apply loss to all assistant messages
         for conv in conversations:
-            if conv["from"] == "gpt":
+            if conv["role"] == "assistant":
                 loss_mask.append(1)  # Assistant messages get loss
             else:
                 loss_mask.append(0)  # User messages get no loss
