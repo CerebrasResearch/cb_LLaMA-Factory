@@ -172,6 +172,7 @@ om_cache/
 cache/
 config/
 saves/
+scripts/cerebras/model_dirs/
 output/
 wandb/
 swanlog/
