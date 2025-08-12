@@ -15,7 +15,7 @@
 import json
 import os
 from dataclasses import dataclass
-from typing import Any, Literal, Optional
+from typing import Any, Literal, Optional, List
 
 from huggingface_hub import hf_hub_download
 
@@ -64,6 +64,8 @@ class DatasetAttr:
     system_tag: Optional[str] = "system"
     # sharegptmask
     loss_mask: Optional[str] = "loss_mask"
+    # dataset pre transforms
+    dataset_transforms: Optional[List[str]] = None
 
     def __repr__(self) -> str:
         return self.dataset_name
@@ -90,6 +92,9 @@ class DatasetAttr:
             tag_names += ["user_tag", "assistant_tag", "observation_tag", "function_tag", "system_tag"]
             for tag in tag_names:
                 self.set_attr(tag, attr["tags"])
+        
+        if "dataset_transforms" in attr:
+            self.set_attr("dataset_transforms", attr, default=None)
 
 
 def get_dataset_list(dataset_names: Optional[list[str]], dataset_dir: str) -> list["DatasetAttr"]:

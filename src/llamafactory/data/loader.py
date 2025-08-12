@@ -33,6 +33,7 @@ from .processor import (
     SupervisedDatasetProcessorWithMask,
     UnsupervisedDatasetProcessor,
 )
+from .transform import DatasetTransform
 
 
 if TYPE_CHECKING:
@@ -159,6 +160,9 @@ def _load_single_dataset(
     if data_args.max_samples is not None:  # truncate dataset
         max_samples = min(data_args.max_samples, len(dataset))
         dataset = dataset.select(range(max_samples))
+
+    if dataset_attr.dataset_transforms is not None:
+        dataset = DatasetTransform.apply_transforms(dataset, dataset_attr.dataset_transforms)
 
     return align_dataset(dataset, dataset_attr, data_args, training_args)
 
