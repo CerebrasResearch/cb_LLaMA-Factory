@@ -53,6 +53,22 @@
       "assistant_tag": "assistant"
     }
   },
+  "gemma3_planner_synth": {
+    "file_name": "/cb/home/aarti/.cache/huggingface/hub/datasets--ds4sd--SynthChartNet/snapshots/b913ef98a3d45f6136465963ddc71a7a6b0e1728/train-00000-of-00135.parquet",
+    "formatting": "sharegpt_mask",
+    "columns": {
+      "messages": "texts",
+      "images": "_images", 
+      "loss_mask": "loss_mask"
+    },
+    "tags": {
+      "role_tag": "role",
+      "content_tag": "content",
+      "user_tag": "user",
+      "assistant_tag": "assistant"
+    },
+    "dataset_transforms": ["synthchart_transform_fast"]
+  },
   "gemma3_planner": {
     "file_name": "/mlf11-shared/multimodal/aarti/datasets/scienceqa/planner_sharegptformat/converted_results.json",
     "formatting": "sharegpt_mask",

@@ -6,6 +6,9 @@ import json
 import glob
 from typing import List, Dict, Any
 
+"""
+python ./scripts/cerebras/convert_to_sharegpt.py --folder_path=/cb/cold2/datapod/VQA_DATASETS/scienceqa/buckets --output_folder=/cb/cold/aarti/vqa_mod
+"""
 
 logging.basicConfig(
     level=logging.INFO,
