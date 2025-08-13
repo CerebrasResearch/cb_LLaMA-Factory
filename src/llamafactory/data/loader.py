@@ -147,10 +147,11 @@ def _load_single_dataset(
 
     if dataset_attr.num_samples is not None and not data_args.streaming:
         target_num = dataset_attr.num_samples
-        indexes = np.random.permutation(len(dataset))[:target_num]  # all samples should be included
+        rng = np.random.default_rng(dataset_attr.num_samples_seed)
+        indexes = rng.permutation(len(dataset))[:target_num]  # all samples should be included
         target_num -= len(indexes)
         if target_num > 0:
-            expand_indexes = np.random.choice(len(dataset), target_num)
+            expand_indexes = rng.choice(len(dataset), target_num)
             indexes = np.concatenate((indexes, expand_indexes), axis=0)
 
         assert len(indexes) == dataset_attr.num_samples, "Sample num mismatched."

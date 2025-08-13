@@ -37,6 +37,7 @@ class DatasetAttr:
     split: str = "train"
     folder: Optional[str] = None
     num_samples: Optional[int] = None
+    num_samples_seed: Optional[int] = 12345
     # common columns
     system: Optional[str] = None
     tools: Optional[str] = None
@@ -80,6 +81,7 @@ class DatasetAttr:
         self.set_attr("split", attr, default="train")
         self.set_attr("folder", attr)
         self.set_attr("num_samples", attr)
+        self.set_attr("num_samples_seed", attr)
 
         if "columns" in attr:
             column_names = ["prompt", "query", "response", "history", "messages", "system", "tools"]
